@@ -9,9 +9,10 @@ Project Members:
 
 Tools used:
 1. Visual Studio 2017
+2. ASP.net
 
 Languages used:
-1. ASP.net
+1. C#
 2. Html, Css and Js
 
 Steps to Install:
