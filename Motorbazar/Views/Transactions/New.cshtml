@@ -1,0 +1,116 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "New";
+}
+<h2>New Transaction Form</h2>
+<form id="newTransaction">
+    <div class="form-group">
+        <label>Customer</label>
+        <div class="tt-container">
+            <input id="customer" name="customer" data-rule-validCustomer="true" required type="text" value="" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Vehicle</label>
+        <div class="tt-container">
+            <input id="vehicle" name="vehicle" data-rule-atLeastOneVehicle="true" type="text" value="" class="form-control">
+        </div>
+    </div>
+        
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <ul id="vehicles" class="list-group"></ul>
+        </div>
+    </div>
+
+        <button class="btn btn-primary">Submit</button>
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+
+            var vm = {
+                vehicleIds: []
+            };
+
+             var customers = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/customers?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+            $('#customer').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                name: 'customers',
+                display: 'name',
+                limit: 1000,
+                source: customers
+                }).on("typeahead:select", function (e, customer) {
+                    vm.customerId = customer.id;
+                });
+
+            var vehicles = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/vehicles?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#vehicle').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                    name: 'vehicles',
+                    display: 'name',
+                    limit: 1000,
+                    source: vehicles
+                }).on("typeahead:select", function (e, vehicle) {
+                    $("#vehicles").append("<li class='list-group-item'>" + vehicle.name + "</li>");
+                    $("#vehicle").typeahead("val", "");
+                    vm.vehicleIds.push(vehicle.id);
+                });
+
+            $.validator.addMethod("validCustomer", function () {
+                return vm.customerId && vm.customerId !== 0;
+            }, "Please select a valid Customer.");
+
+            $.validator.addMethod("atLeastOneVehicle", function () {
+                return vm.vehicleIds.length > 0;
+            }, "Please select at least one vehicle.");
+
+            var validator = $("#newTransaction").validate({
+                submitHandler: function () {
+                    $.ajax({
+                        url: "/api/newTransactions",
+                        method: "post",
+                        data: vm
+                    })
+                        .done(function () {
+                            toastr.success("Transactions successfully recorded.");
+                            $("#customer").typeahead("val", "");
+                            $("#vehicle").typeahead("val", "");
+                            $("#vehicles").empty();
+                            vm = { vehicleIds: [] };
+
+                            validator.resetForm();
+                        })
+                        .fail(function () {
+                            toastr.error("Something unexpected happened");
+                        });
+
+                    return false;
+                }
+            });
+        });
+    </script>
+}

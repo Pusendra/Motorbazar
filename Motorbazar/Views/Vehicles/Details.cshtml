@@ -1,0 +1,18 @@
+﻿@model Motorbazar.Models.Vehicle
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+<ul>
+    <li>Type: @Model.VehicleType.Name</li>
+    <li>Model: @Model.Model</li>
+    <li>Year of Release: @Model.YearOfRelease.ToLongDateString()</li>
+    <li>Price in Lakhs: @Model.Price</li>
+    <li>Mileage in Kmpl: @Model.Mileage</li>
+    <li>Additional Information: @Model.AdditionalInformation</li>
+    <li>Number Available: @Model.NumberAvailable</li>
+    <li>Number In Stock: @Model.NumberInStock</li>
+</ul>
+

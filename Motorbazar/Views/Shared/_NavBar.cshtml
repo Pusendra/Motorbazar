@@ -1,0 +1,30 @@
+﻿<style>
+    .imagelogo{
+        padding-top:5px;
+        max-width: 50px;
+        max-height: 50px;
+        padding-right:0px;
+        padding-bottom:5px;
+    }
+</style>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
+            <a style="text-decoration:none" href="https://localhost:44323/"><img class="imagelogo" src="~/Content/DataTables/images/32117.png"/></a>
+            <a style="text-decoration:none;font-size:30px;color:white;padding-bottom:20px" href="https://localhost:44323/"><sub>MOTORBAZAR &nbsp;</sub></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Vehicles", "Index", "Vehicles")</li>
+                <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+                <li>@Html.ActionLink("New Transaction", "New", "Transactions")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
+

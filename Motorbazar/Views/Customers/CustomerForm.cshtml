@@ -1,0 +1,38 @@
+﻿@model Motorbazar.ViewModels.CustomerFormViewModel
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@Model.Title</h2>
+@using (Html.BeginForm("Save", "Customers"))
+{
+    <div class="form-group">
+        <label for="Name"></label>
+        @Html.LabelFor(v => v.Customer.Name)
+        @Html.TextBoxFor(v => v.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Customer.Name)
+    </div>
+    <div class="form-group">
+        <label for="Birthdate"></label>
+        @Html.LabelFor(v => v.Customer.Birthdate)
+        @Html.TextBoxFor(v => v.Customer.Birthdate, new { @class = "form-control" })
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(v => v.Customer.IsSubscribedToNewsLetter) I am Nepali Citizen.
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="MembershipType"></label>
+        @Html.LabelFor(v => v.Customer.MembershipTypeId)
+        @Html.DropDownListFor(v => v.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name1"), "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Customer.MembershipTypeId)
+    </div>
+    @Html.HiddenFor(v => v.Customer.Id)
+    @Html.AntiForgeryToken()
+<button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    }

@@ -1,0 +1,50 @@
+﻿@model Motorbazar.ViewModels.VehicleFormViewModel
+
+@{
+    /**/
+
+    ViewBag.Title = Model.Title;
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("Save", "Vehicles"))
+{
+    <div class="form-group">
+        @Html.LabelFor(v => v.Vehicle.Name)
+        @Html.TextBoxFor(v => v.Vehicle.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Vehicle.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Vehicle.Model)
+        @Html.TextBoxFor(v => v.Vehicle.Model, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Vehicle.YearOfRelease)
+        @Html.TextBoxFor(v => v.Vehicle.YearOfRelease, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Vehicle.Price)
+        @Html.TextBoxFor(v => v.Vehicle.Price, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Vehicle.Mileage)
+        @Html.TextBoxFor(v => v.Vehicle.Mileage, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Vehicle.VehicleTypeId)
+        @Html.DropDownListFor(v => v.Vehicle.VehicleTypeId, new SelectList(Model.VehicleTypes, "Id", "Name"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Vehicle.VehicleTypeId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Vehicle.AdditionalInformation)
+        @Html.TextBoxFor(v => v.Vehicle.AdditionalInformation, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Vehicle.NumberInStock)
+        @Html.TextBoxFor(v => v.Vehicle.NumberInStock, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(v => v.Vehicle.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}

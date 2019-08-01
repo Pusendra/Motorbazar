@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    .jumbotron {
+        background-image: url('../../Content/DataTables/images/webuycars.jpg');
+        background-size: cover;
+        font-family:Verdana;
+        background-position:center;
+        color:ghostwhite;
+    }
+</style>
+<br>
+<div class="jumbotron">
+    <h1 style="color:red"><b>MOTORBAZAR</b></h1>@DateTime.Now.ToString()<br />
+    <p class="lead">
+        Manage your customers, vehicles and transactions through this MVC ASP.NET based Web Application for Automobile sales.
+    </p>
+    <p><a href="https://localhost:44323/Home/Journey" class="btn btn-primary btn-lg">Learn More &raquo;</a></p>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <h2>About</h2>
+        <p>Get to know the young and aspiring developers team and their journey in creating this web application.<br>
+        Their Academics, FOI and Contacts</p>
+        <p><a class="btn btn-default" href="https://localhost:44323/Home/About" style="background-color:#e95420;border-color:#e95420">Learn More &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Contact</h2>
+        <p>Contact the developers and related institution through their available channels and locations.<br>
+        Institution Name and Address and Reliable Contact</p>
+        <p><a class="btn btn-default" href="https://localhost:44323/Home/Contact" style="background-color:#e95420;border-color:#e95420">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Privacy Policy</h2>
+        <p>Users of the web application must trust in the Developers' committee.<br>
+        Privacy Policy from Developers</p>
+        <p><a class="btn btn-default" href="https://localhost:44323/Home/PrivacyPolicy" style="background-color:#e95420;border-color:#e95420">Learn more &raquo;</a></p>
+    </div>
+</div>

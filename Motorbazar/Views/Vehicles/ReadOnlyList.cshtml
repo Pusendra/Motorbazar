@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Motorbazar.Models.Vehicle>
+
+@{
+    ViewBag.Title = "Vehicles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Vehicles</h2>
+<table id="vehicles" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Vehicle Id</th>
+            <th>Vehicle Name</th>
+            <th>Type</th>
+            <th>Price in Lakhs (NRs)</th>
+            <th>Number Available</th>
+            <th>Number In Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#vehicles").DataTable({
+                ajax: {
+                    url: "/api/vehicles",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "id"
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "vehicleType.name"
+                    },
+                    {
+                        data: "price"
+                    },
+                    {
+                        data: "numberAvailable"
+                    },
+                    {
+                        data: "numberInStock"
+                    },
+                ]
+            });
+        });
+    </script>
+}
